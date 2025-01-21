@@ -1,0 +1,126 @@
+/* Reset e boas práticas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 20px;
+}
+
+.logo {
+    width: 15%;
+    max-width: 150px;
+    margin-bottom: 26px;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 26px;
+}
+
+h1 span {
+    color: #127E80;
+}
+
+p {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 26px;
+}
+
+.contact strong {
+    font-weight: 700;
+}
+
+.contact .divider {
+    color: #127E80;
+}
+
+.contact span {
+    white-space: nowrap;
+}
+
+.illustration {
+    width: 40%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 56px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 20%;
+        max-width: 120px;
+    }
+
+    .illustration {
+        width: 50%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .logo {
+        width: 25%;
+        max-width: 100px;
+    }
+
+    .illustration {
+        width: 60%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 30%;
+        max-width: 80px;
+    }
+
+    .illustration {
+        width: 70%;
+        max-width: 150px;
+    }
+}
