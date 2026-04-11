@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies — KK Barreto Comunica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-dark: #0a6b5e;
+    --teal: #1a9a85;
+    --teal-mid: #2bb8a0;
+    --teal-light: #a8e6dc;
+    --teal-pale: #e8f7f5;
+    --sage: #7aab8a;
+    --sage-light: #c8dfc6;
+    --cream: #f8f6f0;
+    --white: #ffffff;
+    --text-dark: #1a2b28;
+    --text-mid: #3d5550;
+    --text-muted: #7a9490;
+    --border: rgba(26,154,133,0.15);
+    --shadow: 0 8px 32px rgba(10,107,94,0.1);
+    --shadow-hover: 0 16px 48px rgba(10,107,94,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 84px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(10,107,94,0.08); }
+
+  .logo {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--teal-dark);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .logo:hover { background: var(--teal); color: white; }
+
+  .nav-links {
+    display: flex; gap: 2rem;
+    list-style: none; align-items: center;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    position: relative; padding-bottom: 3px;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--teal);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--teal-dark); }
+
+  .btn-cta {
+    padding: 10px 22px;
+    background: var(--teal);
+    color: white; border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-cta:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(10,107,94,0.3);
+  }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column;
+    gap: 5px; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--teal-dark); border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: white; padding: 1.5rem 5%;
+    border-bottom: 1px solid var(--border);
+    z-index: 99; flex-direction: column; gap: 1rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 15px; font-weight: 500;
+    color: var(--text-mid); text-decoration: none;
+    padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:hover { color: var(--teal); }
+
+  /* ── BANNER ── */
+  .page-banner {
+    margin-top: 68px;
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+  }
+
+  .banner-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+      #c8dfc6 0%, #7aab8a 22%,
+      #2bb8a0 50%, #0a6b5e 78%, #065048 100%
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .banner-overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.06) 0%, transparent 60%);
+  }
+
+  .banner-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .banner-content {
+    padding: 3.5rem 0;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .banner-label {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 1rem;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .banner-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .banner-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .banner-arrow {
+    position: absolute;
+    right: 0; bottom: 2rem;
+    z-index: 2;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; text-decoration: none;
+    color: white;
+    transition: all 0.3s;
+    animation: bounceDown 2s ease infinite;
+  }
+  .banner-arrow:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: white;
+  }
+  .banner-arrow svg {
+    width: 18px; height: 18px;
+    stroke: white; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(6px); }
+  }
+
+  /* ── CONTEÚDO LEGAL ── */
+  .legal-section {
+    padding: 5rem 5% 6rem;
+    background: var(--white);
+  }
+
+  .legal-inner {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .legal-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    background: var(--teal-pale);
+    border-left: 3px solid var(--teal);
+    border-radius: 6px;
+    margin-bottom: 3rem;
+    font-size: 14px;
+    color: var(--text-mid);
+  }
+  .legal-meta strong { color: var(--teal-dark); font-weight: 600; }
+  .legal-meta svg {
+    width: 18px; height: 18px;
+    stroke: var(--teal);
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+
+  .legal-intro {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text-mid);
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .legal-intro strong { color: var(--teal-dark); font-weight: 600; }
+
+  .legal-block {
+    margin-bottom: 2.8rem;
+  }
+
+  .legal-block h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+  .legal-block h2 .num {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--teal);
+    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .legal-block p {
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+  .legal-block p strong { color: var(--text-dark); font-weight: 600; }
+  .legal-block a { color: var(--teal); text-decoration: none; font-weight: 500; border-bottom: 1px solid rgba(26,154,133,0.3); transition: border-color 0.3s; }
+  .legal-block a:hover { border-color: var(--teal); }
+
+  .legal-block ul {
+    list-style: none;
+    margin: 1rem 0 1.2rem;
+    padding: 0;
+  }
+  .legal-block ul li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 0.7rem;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-mid);
+  }
+  .legal-block ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.7rem;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(43,184,160,0.15);
+  }
+  .legal-block ul li strong { color: var(--text-dark); font-weight: 600; }
+
+  .legal-cta-card {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, var(--teal-pale) 0%, #f0faf7 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .legal-cta-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 0.6rem;
+  }
+  .legal-cta-card p {
+    font-size: 15px;
+    color: var(--text-mid);
+    margin-bottom: 1.4rem;
+    line-height: 1.7;
+  }
+  .legal-cta-card a {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--teal);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.3s;
+  }
+  .legal-cta-card a:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(10,107,94,0.3);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--teal-dark);
+    color: white; padding: 4rem 5% 2rem;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+  .footer-brand .logo-footer {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 700; color: white;
+    margin-bottom: 1.2rem;
+  }
+  .footer-brand p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.7); max-width: 280px; }
+  .footer-brand .tagline {
+    font-size: 16px; color: var(--teal-light);
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+  }
+
+  .footer-col h4 {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+  .footer-col ul a:hover { color: var(--teal-light); }
+
+  .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-2px); }
+  .social-btn svg { width: 16px; height: 16px; fill: white; }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 13px; color: rgba(255,255,255,0.4);
+  }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--teal-light); }
+
+  /* WHATSAPP */
+  .whatsapp-float {
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 56px; height: 56px; background: #25d366;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 200;
+    transition: all 0.3s; text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+  .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+
+  /* RESPONSIVO */
+  @media (max-width: 900px) {
+    .nav-links, nav > .btn-cta { display: none; }
+    .hamburger { display: flex; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+    .legal-section { padding: 4rem 5% 5rem; }
+    .legal-cta-card { padding: 2rem 1.5rem; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 4%; }
+    .banner-content { padding: 2.8rem 0; }
+    .banner-title { font-size: 1.85rem; }
+    .legal-section { padding: 3rem 5% 4rem; }
+    .legal-intro { font-size: 16px; }
+    .legal-block h2 { font-size: 1.25rem; flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .legal-block p, .legal-block ul li { font-size: 15px; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="kk-barreto.html" class="logo">KK</a>
+  <ul class="nav-links">
+    <li><a href="kk-barreto.html">Início</a></li>
+    <li><a href="quem-somos.html">Quem Somos</a></li>
+    <li><a href="servicos.html">Serviços</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="contato.html" class="btn-cta">Fale Conosco</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="kk-barreto.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="blog.html">Blog</a>
+  <a href="contato.html" class="btn-cta" style="text-align:center; margin-top:0.5rem;">Fale Conosco</a>
+</div>
+
+<!-- BANNER -->
+<div class="page-banner">
+  <div class="banner-bg"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <p class="banner-label">Transparência</p>
+      <h1 class="banner-title">Política<br>de Cookies</h1>
+      <p class="banner-sub">Pequenos arquivos, grande diferença na sua experiência. Saiba como usamos cookies para tornar a navegação no nosso site mais fluida e útil.</p>
+    </div>
+    <a href="#conteudo" class="banner-arrow">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- CONTEÚDO -->
+<section class="legal-section" id="conteudo">
+  <div class="legal-inner">
+
+    <div class="legal-meta reveal">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Última atualização: <strong>Abril de 2026</strong> &nbsp;·&nbsp; Compatível com a <strong>LGPD</strong> e o <strong>Marco Civil da Internet</strong></span>
+    </div>
+
+    <p class="legal-intro reveal">
+      Esta Política de Cookies explica, de forma simples e direta, o que são cookies, quais tipos utilizamos no site da <strong>KK Barreto Comunica</strong>, com quais finalidades e como você pode gerenciá-los a qualquer momento. Nosso objetivo é dar a você visibilidade total sobre o que acontece nos bastidores da sua navegação — porque acreditamos que comunicação boa começa pela transparência.
+    </p>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">01</span> O que são cookies</h2>
+      <p>Cookies são pequenos arquivos de texto que ficam armazenados no seu navegador quando você visita um site. Eles funcionam como uma espécie de memória temporária: ajudam a página a lembrar de preferências, manter você conectado, medir audiência e oferecer uma experiência mais consistente entre visitas. Os cookies não acessam o disco rígido do seu dispositivo, não instalam programas e, na maioria dos casos, não armazenam informações que identifiquem você diretamente.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">02</span> Por que utilizamos cookies</h2>
+      <p>Na <strong>KK Barreto Comunica</strong>, utilizamos cookies para que o site funcione corretamente, para entender como ele é utilizado e para aprimorar continuamente a experiência de quem nos visita. Em resumo, os cookies nos ajudam a:</p>
+      <ul>
+        <li>Garantir o funcionamento básico das páginas e funcionalidades.</li>
+        <li>Lembrar preferências de navegação, como idioma ou consentimento já dado.</li>
+        <li>Medir o desempenho do site e identificar quais conteúdos despertam mais interesse.</li>
+        <li>Integrar funcionalidades de plataformas externas, como redes sociais e vídeos.</li>
+        <li>Apoiar campanhas de comunicação e mensuração de resultados, quando aplicável.</li>
+      </ul>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">03</span> Tipos de cookies que utilizamos</h2>
+      <p>Os cookies presentes em nosso site podem ser classificados em quatro grandes categorias, conforme sua finalidade:</p>
+      <ul>
+        <li><strong>Essenciais:</strong> indispensáveis para o funcionamento do site. Sem eles, recursos básicos como navegação entre páginas, formulários de contato e segurança não funcionariam corretamente. Esses cookies não podem ser desativados.</li>
+        <li><strong>De desempenho e análise:</strong> coletam informações agregadas sobre como os visitantes interagem com o site — páginas mais acessadas, tempo de permanência, origem do tráfego. Usamos essas informações apenas para melhorar nossos conteúdos e a experiência do usuário, por meio de ferramentas como o <a href="https://analytics.google.com" target="_blank" rel="noopener">Google Analytics</a>.</li>
+        <li><strong>De funcionalidade:</strong> permitem que o site lembre de escolhas que você fez (como o consentimento aos próprios cookies) para oferecer uma experiência mais personalizada nas próximas visitas.</li>
+        <li><strong>De terceiros:</strong> instalados por serviços externos integrados ao nosso site, como botões de redes sociais, vídeos incorporados e ferramentas de comunicação. Cada um desses serviços possui sua própria política de cookies.</li>
+      </ul>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">04</span> Cookies de terceiros</h2>
+      <p>Algumas funcionalidades do nosso site dependem de plataformas externas que podem instalar seus próprios cookies. Os principais parceiros que podem fazer isso são:</p>
+      <ul>
+        <li><strong>Google Analytics:</strong> mensuração de audiência, comportamento de navegação e estatísticas agregadas.</li>
+        <li><strong>Meta (Facebook e Instagram):</strong> integração com botões sociais e mensuração de campanhas institucionais.</li>
+        <li><strong>YouTube:</strong> incorporação e exibição de vídeos diretamente nas páginas do site.</li>
+        <li><strong>WhatsApp:</strong> integração com o botão de contato direto pelo aplicativo.</li>
+      </ul>
+      <p>A KK Barreto Comunica não controla os cookies depositados por essas plataformas. Recomendamos consultar as políticas de privacidade de cada uma para entender como esses dados são tratados do outro lado.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">05</span> Consentimento</h2>
+      <p>No primeiro acesso ao nosso site, você visualiza um aviso solicitando seu consentimento para o uso de cookies não essenciais. Esse consentimento é livre, informado e pode ser retirado a qualquer momento. Cookies estritamente necessários ao funcionamento do site são instalados independentemente do seu aceite, conforme permite a legislação vigente. Ao continuar navegando após o aviso, entende-se que você concorda com o uso dos cookies descritos nesta Política.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">06</span> Como gerenciar ou desativar cookies</h2>
+      <p>Você tem total controle sobre os cookies que ficam armazenados no seu dispositivo. A maioria dos navegadores permite bloquear, apagar ou receber avisos sempre que um novo cookie for instalado. As instruções variam conforme o navegador utilizado:</p>
+      <ul>
+        <li><strong>Google Chrome:</strong> Configurações &rsaquo; Privacidade e segurança &rsaquo; Cookies e outros dados de sites.</li>
+        <li><strong>Mozilla Firefox:</strong> Configurações &rsaquo; Privacidade e segurança &rsaquo; Cookies e dados de sites.</li>
+        <li><strong>Safari:</strong> Preferências &rsaquo; Privacidade &rsaquo; Gerenciar dados de sites.</li>
+        <li><strong>Microsoft Edge:</strong> Configurações &rsaquo; Cookies e permissões de site.</li>
+      </ul>
+      <p>É importante saber que desativar determinados cookies pode comprometer parte das funcionalidades do site, como formulários, integrações com vídeo e exibição correta de algumas páginas.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">07</span> Por quanto tempo os cookies ficam armazenados</h2>
+      <p>O tempo de permanência de um cookie no seu dispositivo varia conforme a sua finalidade. Existem dois tipos principais: os <strong>cookies de sessão</strong>, que são apagados automaticamente quando você fecha o navegador; e os <strong>cookies persistentes</strong>, que permanecem por um período pré-determinado ou até serem removidos manualmente. Em geral, utilizamos cookies persistentes apenas pelo tempo estritamente necessário às finalidades declaradas nesta Política.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">08</span> Atualizações desta política</h2>
+      <p>Esta Política de Cookies pode ser atualizada periodicamente para refletir mudanças nas tecnologias utilizadas, novas integrações ou ajustes regulatórios. Quando isso acontecer, a data de atualização no topo desta página será alterada. Recomendamos que você reveja este documento de tempos em tempos para se manter informado sobre como utilizamos cookies em nosso site.</p>
+    </div>
+
+    <div class="legal-block reveal">
+      <h2><span class="num">09</span> Relação com outras políticas</h2>
+      <p>Esta Política de Cookies complementa a nossa <a href="politica-privacidade.html">Política de Privacidade</a> e os nossos <a href="termos-de-uso.html">Termos de Uso</a>. Juntos, esses três documentos descrevem como tratamos as informações de quem visita o site e quais regras orientam a sua navegação. A leitura conjunta é a forma mais completa de entender nossas práticas.</p>
+    </div>
+
+    <div class="legal-cta-card reveal">
+      <h3>Ficou com alguma dúvida sobre cookies?</h3>
+      <p>Se você quer entender melhor como utilizamos cookies, exercer seus direitos como titular ou simplesmente conversar com a nossa equipe, é só mandar uma mensagem.</p>
+      <a href="mailto:contato@kkbarretocomunica.com">Falar com a KK Barreto</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-footer">KK</div>
+        <p class="tagline">O equilíbrio perfeito entre tradição e inovação.</p>
+        <p>KK Barreto Comunica, 2024.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" style="fill:none;stroke:white;stroke-width:1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" style="stroke:white;stroke-width:2;stroke-linecap:round"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="kk-barreto.html">Home</a></li>
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 KK Barreto Comunica. Todos os direitos reservados.</p>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="politica-privacidade.html">Políticas de privacidade</a>
+        <a href="termos-de-uso.html">Termos de uso</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5511930212108" target="_blank" class="whatsapp-float" aria-label="Contato via WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+</script>
+</body>
+</html>

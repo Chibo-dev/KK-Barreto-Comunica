@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KK Barreto Comunica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal-dark: #0a6b5e;
+    --teal: #1a9a85;
+    --teal-mid: #2bb8a0;
+    --teal-light: #a8e6dc;
+    --teal-pale: #e8f7f5;
+    --sage: #7aab8a;
+    --sage-light: #c8dfc6;
+    --cream: #f8f6f0;
+    --white: #ffffff;
+    --text-dark: #1a2b28;
+    --text-mid: #3d5550;
+    --text-muted: #7a9490;
+    --border: rgba(26,154,133,0.15);
+    --shadow: 0 8px 32px rgba(10,107,94,0.1);
+    --shadow-hover: 0 16px 48px rgba(10,107,94,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  /* Compensa a altura do header fixo (68px) ao usar âncoras */
+  section[id] { scroll-margin-top: 84px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 5%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+
+  nav.scrolled { box-shadow: 0 2px 24px rgba(10,107,94,0.08); }
+
+  .logo {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal-dark);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .logo:hover { background: var(--teal); color: white; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--teal);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--teal-dark); }
+
+  .btn-cta {
+    padding: 10px 22px;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.3s;
+  }
+  .btn-cta:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(10,107,94,0.3);
+  }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--teal-dark);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: white;
+    padding: 1.5rem 5%;
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    margin-top: 68px;
+    min-height: 520px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #c8dfc6 0%, #7aab8a 25%, #2bb8a0 55%, #0a6b5e 80%, #065048 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 4rem 5%;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.82);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  .btn-hero-primary {
+    padding: 13px 28px;
+    background: white;
+    color: var(--teal-dark);
+    border: none;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+  }
+
+  .btn-hero-outline {
+    padding: 13px 28px;
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-hero-outline:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: white;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+
+  .hero-scroll-line {
+    width: 1px; height: 32px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 5%; }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title span { color: var(--teal); }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ── ABOUT / BEM-VINDO ── */
+  .about {
+    background: var(--white);
+  }
+
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+
+  .about-text p:first-of-type {
+    font-size: 16px;
+    color: var(--text-dark);
+  }
+
+  .about-text p strong,
+  .about-text p a {
+    color: var(--teal);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 12px 26px;
+    background: transparent;
+    color: var(--teal-dark);
+    border: 1.5px solid var(--teal);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    background: var(--teal);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+
+  .about-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 12px;
+  }
+
+  .about-img {
+    border-radius: 12px;
+    background: var(--teal-pale);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+  }
+
+  .about-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-img:hover { transform: scale(1.02); }
+
+  .about-img:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .about-img.tall {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    border-radius: 16px;
+  }
+
+  .about-img.wide {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    background: var(--cream);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .services-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.8rem;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--sage));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--teal-light);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card.featured {
+    border-color: var(--teal-light);
+    background: linear-gradient(160deg, #f0faf8 0%, white 100%);
+  }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover .service-icon { transform: scale(1.08) rotate(-4deg); }
+
+  .service-icon svg {
+    width: 24px; height: 24px;
+    stroke: white;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .service-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.7rem;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .service-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.3s;
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* ── CLIENTS ── */
+  .clients {
+    background: var(--white);
+  }
+
+  .clients-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .clients-track-wrap {
+    overflow: hidden;
+    mask: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+    -webkit-mask: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+  }
+
+  .clients-track {
+    display: flex;
+    gap: 2rem;
+    animation: scroll 20s linear infinite;
+    width: max-content;
+  }
+
+  .client-logo {
+    width: 140px; height: 60px;
+    background: var(--teal-pale);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .client-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .client-logo:hover {
+    background: var(--teal-light);
+    border-color: var(--teal);
+    transform: scale(1.04);
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--teal-dark);
+    color: white;
+    padding: 4rem 5% 2rem;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand .logo-footer {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-brand p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.7);
+    max-width: 280px;
+  }
+
+  .footer-brand .tagline {
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    font-size: 16px;
+    color: var(--teal-light);
+    margin-bottom: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul a:hover { color: var(--teal-light); }
+
+  .social-links {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    color: white;
+    font-size: 14px;
+  }
+  .social-btn:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+
+  .social-btn svg {
+    width: 16px; height: 16px;
+    fill: white;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer-bottom a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+  }
+  .footer-bottom a:hover { color: var(--teal-light); }
+
+  /* ── WHATSAPP FLOAT ── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 56px; height: 56px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    z-index: 200;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
+  }
+  .whatsapp-float svg {
+    width: 28px; height: 28px;
+    fill: white;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links, .btn-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-images { order: -1; }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 4%; }
+    section { padding: 3.5rem 4%; }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">KK</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Início</a></li>
+    <li><a href="quem-somos.html">Quem Somos</a></li>
+    <li><a href="servicos.html">Serviços</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="contato.html" class="btn-cta">Fale Conosco</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="blog.html">Blog</a>
+  <a href="contato.html" class="btn-cta" style="text-align:center; margin-top:0.5rem;">Fale Conosco</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tagline">Comunicação Estratégica</p>
+    <h1 class="hero-title">Sua história merece<br>ser bem contada</h1>
+    <p class="hero-subtitle">Amplificamos sua presença, fortalecemos sua credibilidade e transformamos ideias em resultados concretos.</p>
+    <div class="hero-btns">
+      <a href="#servicos" class="btn-hero-primary">Nossos Serviços</a>
+      <a href="#sobre" class="btn-hero-outline">Conheça a KK</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="about" id="sobre">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <p class="section-label">Quem Somos</p>
+      <h2 class="section-title">Bem-vindos à<br><span>KK Barreto Comunica</span></h2>
+      <br>
+      <p>Na <strong>KK Barreto Comunica</strong>, nossa missão é compartilhar conhecimento de forma estratégica, ampliando a visibilidade, fortalecendo a credibilidade e construindo a reputação dos nossos clientes.</p>
+      <p>Mais do que entregar resultados, buscamos entender profundamente os objetivos de cada cliente para transformar ideias em realidade, utilizando as melhores ferramentas de comunicação e soluções personalizadas.</p>
+      <p>Contamos com um time multidisciplinar de jornalistas, social medias e designers, sempre antenado às tendências do mercado. Nossos serviços são conduzidos com responsabilidade e seguem as diretrizes dos órgãos reguladores das áreas em que atuamos, como Medicina, Odontologia e Psicologia.</p>
+      <a href="servicos.html" class="btn-secondary">Conheça nossos serviços &rsaquo;&rsaquo;</a>
+    </div>
+    <div class="about-images reveal reveal-delay-2">
+      <div class="about-img"><img src="" alt="KK Barreto Comunica - imagem 1"></div>
+      <div class="about-img tall"><img src="" alt="KK Barreto Comunica - imagem 2"></div>
+      <div class="about-img wide"><img src="" alt="KK Barreto Comunica - imagem 3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="services" id="servicos">
+  <div class="services-header reveal">
+    <p class="section-label">O que fazemos</p>
+    <h2 class="section-title">Apresentando nossos <span>serviços</span></h2>
+    <p class="section-sub" style="margin: 0.8rem auto 0; text-align:center;">Conheça as soluções oferecidas pela <strong style="color:var(--teal)">KK Barreto Comunica</strong></p>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- Social Media -->
+    <div class="service-card featured reveal reveal-delay-1">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <p class="service-name">Social Media</p>
+      <p class="service-desc">Gestão completa das suas redes sociais com estratégia, criação de conteúdo e análise de métricas para maximizar seu alcance digital.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+    <!-- Site Institucional -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <p class="service-name">Site Institucional e Landing Page</p>
+      <p class="service-desc">Desenvolvimento de sites e páginas de conversão que comunicam sua marca com clareza e impulsionam resultados.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+    <!-- Tráfego Pago -->
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      </div>
+      <p class="service-name">Tráfego Pago</p>
+      <p class="service-desc">Campanhas otimizadas no Google, Meta e outras plataformas para atrair o público certo e aumentar suas conversões.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+    <!-- Projetos Editoriais -->
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <p class="service-name">Projetos Editoriais</p>
+      <p class="service-desc">Criação de livros, e-books, revistas e materiais editoriais com design sofisticado e conteúdo estratégico.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+    <!-- Eventos -->
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0 3 3m-3-3a3 3 0 0 1-3 3m3-3v1M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/><circle cx="12" cy="12" r="9"/></svg>
+      </div>
+      <p class="service-name">Eventos</p>
+      <p class="service-desc">Planejamento, comunicação e cobertura de eventos corporativos e institucionais com excelência e atenção aos detalhes.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+    <!-- Assessoria de Imprensa -->
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <p class="service-name">Assessoria de Imprensa</p>
+      <p class="service-desc">Relacionamento estratégico com a mídia para garantir visibilidade positiva e autoridade para a sua marca.</p>
+      <a href="servicos.html" class="service-link">Leia mais →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clients">
+  <div class="clients-header reveal">
+    <p class="section-label">Quem confia na KK</p>
+    <h2 class="section-title">Conheça nossos <span>clientes</span></h2>
+    <p class="section-sub" style="margin: 0.8rem auto 0; text-align:center;">Alguns dos clientes que já confiaram na <strong style="color:var(--teal)">KK Barreto Comunica</strong></p>
+  </div>
+  <div class="clients-track-wrap" style="margin-top:2.5rem;">
+    <div class="clients-track" id="clientsTrack">
+      <div class="client-logo"><img src="" alt="Cliente 1"></div>
+      <div class="client-logo"><img src="" alt="Cliente 2"></div>
+      <div class="client-logo"><img src="" alt="Cliente 3"></div>
+      <div class="client-logo"><img src="" alt="Cliente 4"></div>
+      <div class="client-logo"><img src="" alt="Cliente 5"></div>
+      <div class="client-logo"><img src="" alt="Cliente 6"></div>
+      <div class="client-logo"><img src="" alt="Cliente 7"></div>
+      <div class="client-logo"><img src="" alt="Cliente 8"></div>
+      <!-- duplicated for infinite loop -->
+      <div class="client-logo"><img src="" alt="Cliente 1"></div>
+      <div class="client-logo"><img src="" alt="Cliente 2"></div>
+      <div class="client-logo"><img src="" alt="Cliente 3"></div>
+      <div class="client-logo"><img src="" alt="Cliente 4"></div>
+      <div class="client-logo"><img src="" alt="Cliente 5"></div>
+      <div class="client-logo"><img src="" alt="Cliente 6"></div>
+      <div class="client-logo"><img src="" alt="Cliente 7"></div>
+      <div class="client-logo"><img src="" alt="Cliente 8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-footer">KK</div>
+        <p class="tagline">O equilíbrio perfeito entre tradição e inovação.</p>
+        <p>KK Barreto Comunica, 2024.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" style="fill:none;stroke:white;stroke-width:1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" style="stroke:white;stroke-width:2;stroke-linecap:round"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 KK Barreto Comunica. Todos os direitos reservados.</p>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="politica-privacidade.html">Políticas de privacidade</a>
+        <a href="termos-de-uso.html">Termos de uso</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5511930212108" target="_blank" class="whatsapp-float" aria-label="Contato via WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const h = document.getElementById('hamburger');
+    const m = document.getElementById('mobileMenu');
+    h.classList.toggle('open');
+    m.classList.toggle('open');
+  }
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-menu a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(r => observer.observe(r));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (current) {
+        a.classList.toggle('active', href === '#' + current);
+      } else {
+        // No section in view yet — keep "Início" active
+        a.classList.toggle('active', href === 'index.html');
+      }
+    });
+  });
+</script>
+</body>
+</html>
