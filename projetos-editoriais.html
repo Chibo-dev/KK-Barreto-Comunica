@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos Editoriais — KK Barreto Comunica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal-dark:#0a6b5e; --teal:#1a9a85; --teal-mid:#2bb8a0;
+    --teal-light:#a8e6dc; --teal-pale:#e8f7f5;
+    --sage:#7aab8a; --sage-light:#c8dfc6;
+    --cream:#f8f6f0; --paper:#fbf9f2; --white:#fff;
+    --text-dark:#1a2b28; --text-mid:#3d5550; --text-muted:#7a9490;
+    --border:rgba(26,154,133,0.15);
+    --shadow:0 8px 32px rgba(10,107,94,0.1);
+    --shadow-hover:0 16px 48px rgba(10,107,94,0.18);
+  }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; color:var(--text-dark); background:var(--white); overflow-x:hidden; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 5%; height:68px;
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border); transition:box-shadow 0.3s; }
+  nav.scrolled { box-shadow:0 2px 24px rgba(10,107,94,0.08); }
+  .logo { width:44px; height:44px; border-radius:50%; border:2px solid var(--teal);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Outfit',sans-serif; font-size:14px; font-weight:700;
+    color:var(--teal-dark); text-decoration:none; transition:all 0.3s; }
+  .logo:hover { background:var(--teal); color:white; }
+  .nav-links { display:flex; gap:2rem; list-style:none; align-items:center;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); }
+  .nav-links a { font-size:14px; font-weight:500; color:var(--text-mid);
+    text-decoration:none; position:relative; padding-bottom:3px; transition:color 0.3s; }
+  .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px;
+    background:var(--teal); transition:width 0.3s; }
+  .nav-links a:hover { color:var(--teal); }
+  .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+  .nav-links a.active { color:var(--teal-dark); }
+  .btn-cta { padding:10px 22px; background:var(--teal); color:white; border:none; border-radius:6px;
+    font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; cursor:pointer;
+    text-decoration:none; transition:all 0.3s; }
+  .btn-cta:hover { background:var(--teal-dark); transform:translateY(-1px); box-shadow:0 6px 20px rgba(10,107,94,0.3); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:24px; height:2px; background:var(--teal-dark); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display:none; position:fixed; top:68px; left:0; right:0;
+    background:white; padding:1.5rem 5%; border-bottom:1px solid var(--border);
+    z-index:99; flex-direction:column; gap:1rem; }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a { font-size:15px; font-weight:500; color:var(--text-mid);
+    text-decoration:none; padding:0.5rem 0; border-bottom:1px solid var(--border); }
+
+  /* BANNER */
+  .page-banner { margin-top:68px; min-height:300px; position:relative; overflow:hidden;
+    display:flex; align-items:center; padding:0 5%; }
+  .banner-bg { position:absolute; inset:0;
+    background:linear-gradient(135deg,#c8dfc6 0%,#7aab8a 22%,#2bb8a0 50%,#0a6b5e 78%,#065048 100%);
+    background-size:300% 300%; animation:gradientShift 12s ease infinite; }
+  @keyframes gradientShift { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
+  .banner-overlay { position:absolute; inset:0; background:radial-gradient(ellipse at 70% 40%, rgba(255,255,255,0.06) 0%, transparent 60%); }
+  .banner-inner { position:relative; z-index:2; width:100%; max-width:1200px; margin:0 auto; }
+  .banner-content { padding:3.5rem 0; animation:fadeUp 0.9s ease 0.1s both; }
+  .banner-label { font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(255,255,255,0.65); margin-bottom:1rem; font-family:'Outfit',sans-serif; }
+  .banner-title { font-family:'Outfit',sans-serif; font-size:clamp(2rem,4.5vw,3.2rem); font-weight:700;
+    color:white; line-height:1.15; margin-bottom:1rem; }
+  .banner-sub { font-size:15px; color:rgba(255,255,255,0.8); line-height:1.7; font-weight:300; max-width:520px; }
+  .banner-arrow { position:absolute; right:0; bottom:2rem; z-index:2;
+    width:42px; height:42px; border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.5); background:rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; text-decoration:none; color:white; transition:all 0.3s;
+    animation:bounceDown 2s ease infinite; }
+  .banner-arrow:hover { background:rgba(255,255,255,0.2); border-color:white; }
+  .banner-arrow svg { width:18px; height:18px; stroke:white; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  @keyframes bounceDown { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+
+  section { padding:5.5rem 5%; }
+  .section-label { font-size:12px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+    color:var(--teal); margin-bottom:0.6rem; font-family:'Outfit',sans-serif; }
+
+  /* INTRO — open book metaphor */
+  .intro { background:var(--white); }
+  .intro-inner { max-width:1100px; margin:0 auto; display:grid;
+    grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center; }
+  .intro-text h2 { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:600; color:var(--teal-dark); line-height:1.2; margin-bottom:1.4rem; }
+  .intro-text h2 span { color:var(--teal); }
+  .intro-text p { font-size:15px; line-height:1.85; color:var(--text-mid); margin-bottom:1rem; }
+
+  /* Open book SVG visual */
+  .book-visual { position:relative; aspect-ratio:1.1/1; display:flex; align-items:center; justify-content:center; }
+  .book-visual svg { width:100%; height:auto; filter:drop-shadow(0 20px 40px rgba(10,107,94,0.18)); }
+
+  /* PILLARS — three editorial deliverables */
+  .pillars { background:linear-gradient(180deg,var(--paper) 0%,var(--cream) 100%); }
+  .pillars-head { text-align:center; max-width:680px; margin:0 auto 3.5rem; }
+  .pillars-head h2 { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:0.6rem; }
+  .pillars-head h2 span { color:var(--teal); }
+  .pillars-head p { font-size:15px; color:var(--text-muted); line-height:1.7; }
+  .pillars-grid { max-width:1100px; margin:0 auto; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+  .pillar-card { background:var(--white); border:1px solid var(--border); border-radius:18px;
+    padding:2.4rem 2rem 2.2rem; transition:all 0.4s; position:relative; overflow:hidden; }
+  .pillar-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--teal-light),var(--teal),var(--teal-dark));
+    transform:scaleX(0); transform-origin:left; transition:transform 0.5s; }
+  .pillar-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-hover); border-color:var(--teal-light); }
+  .pillar-card:hover::before { transform:scaleX(1); }
+  .pillar-num { font-family:'Outfit',sans-serif; font-size:2.4rem; font-weight:300;
+    color:var(--teal-light); line-height:1; margin-bottom:0.8rem; }
+  .pillar-card h3 { font-family:'Outfit',sans-serif; font-size:1.2rem; font-weight:600;
+    color:var(--teal-dark); margin-bottom:0.8rem; line-height:1.25; }
+  .pillar-card p { font-size:14px; line-height:1.75; color:var(--text-mid); }
+
+  /* PROCESS — editorial workflow */
+  .process { background:var(--white); }
+  .process-head { text-align:center; margin-bottom:3.5rem; }
+  .process-head h2 { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:600; color:var(--text-dark); }
+  .process-head h2 span { color:var(--teal); }
+  .process-line { max-width:1000px; margin:0 auto; position:relative;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+  .process-line::before { content:''; position:absolute; top:28px; left:8%; right:8%; height:2px;
+    background:repeating-linear-gradient(90deg,var(--teal-light) 0,var(--teal-light) 8px,transparent 8px,transparent 14px); z-index:0; }
+  .step { position:relative; z-index:1; text-align:center; }
+  .step-circle { width:56px; height:56px; border-radius:50%;
+    background:var(--white); border:2px solid var(--teal);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;
+    font-family:'Outfit',sans-serif; font-weight:600; font-size:1.1rem; color:var(--teal-dark);
+    transition:all 0.3s; }
+  .step:hover .step-circle { background:var(--teal); color:white; transform:scale(1.08); }
+  .step h4 { font-family:'Outfit',sans-serif; font-size:14px; font-weight:600;
+    color:var(--text-dark); margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:1px; }
+  .step p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+
+  /* PORTFOLIO */
+  .portfolio-section { background:var(--white); }
+  .portfolio-head { text-align:center; margin-bottom:0.8rem; }
+  .portfolio-head h2 { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:600; color:var(--text-dark); }
+  .portfolio-head h2 span { color:var(--teal); }
+  .portfolio-sub { text-align:center; font-size:15px; color:var(--text-muted); margin-bottom:3rem; }
+  .portfolio-grid { max-width:1100px; margin:0 auto; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:1.8rem; }
+  .work-card { border-radius:14px; overflow:hidden; border:1px solid var(--border);
+    background:var(--white); transition:all 0.35s; cursor:pointer; text-decoration:none; color:inherit; display:block; }
+  .work-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-hover); border-color:var(--teal-light); }
+  .work-thumb { width:100%; aspect-ratio:4/5; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; padding:1.8rem; }
+  .work-card:nth-child(1) .work-thumb { background:linear-gradient(135deg,#e8f7f5 0%,#c8dfc6 100%); }
+  .work-card:nth-child(2) .work-thumb { background:linear-gradient(135deg,#f8f6f0 0%,#a8e6dc 100%); }
+  .work-card:nth-child(3) .work-thumb { background:linear-gradient(135deg,#d4efe8 0%,#7aab8a 100%); }
+  /* mock magazine cover */
+  .mag-mock { width:78%; aspect-ratio:3/4; background:var(--white); border-radius:4px;
+    box-shadow:0 18px 40px rgba(10,107,94,0.22); padding:14px 12px;
+    display:flex; flex-direction:column; gap:6px; position:relative; transform:rotate(-2deg);
+    transition:transform 0.4s; }
+  .work-card:hover .mag-mock { transform:rotate(0) scale(1.04); }
+  .mag-mock::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:linear-gradient(180deg,var(--teal),var(--teal-dark)); border-radius:4px 0 0 4px; }
+  .mag-tag { font-family:'Outfit',sans-serif; font-size:7px; font-weight:700;
+    letter-spacing:1.5px; color:var(--teal); text-transform:uppercase; margin-left:4px; }
+  .mag-title { font-family:'Outfit',sans-serif; font-size:13px; font-weight:700;
+    color:var(--teal-dark); line-height:1.1; margin:2px 0 6px 4px; }
+  .mag-img { flex:1; border-radius:3px; margin:0 4px; overflow:hidden;
+    background:linear-gradient(135deg,var(--teal-light),var(--sage)); }
+  .mag-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .mag-lines { display:flex; flex-direction:column; gap:3px; margin:6px 4px 0; }
+  .mag-lines span { height:2px; background:var(--text-muted); opacity:0.4; border-radius:1px; }
+  .mag-lines span:nth-child(1) { width:90%; }
+  .mag-lines span:nth-child(2) { width:75%; }
+  .mag-lines span:nth-child(3) { width:85%; }
+  .work-info { padding:1.3rem 1.4rem 1.5rem; }
+  .work-tag { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--teal); font-family:'Outfit',sans-serif; margin-bottom:0.4rem; }
+  .work-name { font-family:'Outfit',sans-serif; font-size:16px; font-weight:600;
+    color:var(--text-dark); margin-bottom:0.3rem; }
+  .work-desc { font-size:13px; color:var(--text-muted); line-height:1.6; }
+
+  /* CTA */
+  .cta-section { background:linear-gradient(135deg,var(--teal-pale) 0%,var(--cream) 100%);
+    text-align:center; position:relative; overflow:hidden; }
+  .cta-inner { max-width:720px; margin:0 auto; position:relative; z-index:2; }
+  .cta-inner h2 { font-family:'Outfit',sans-serif; font-size:clamp(2rem,4vw,2.8rem);
+    font-weight:600; color:var(--text-dark); margin-bottom:0.8rem; line-height:1.2; }
+  .cta-inner h2 span { color:var(--teal); }
+  .cta-inner p { font-size:15px; color:var(--text-muted); margin-bottom:2.5rem; line-height:1.7; }
+  .btn-primary-large { display:inline-block; padding:16px 38px;
+    background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
+    color:white; border:none; border-radius:6px; font-family:'DM Sans',sans-serif;
+    font-size:13px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+    text-decoration:none; transition:all 0.3s; box-shadow:0 4px 20px rgba(10,107,94,0.25); }
+  .btn-primary-large:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(10,107,94,0.35); }
+
+  /* FOOTER */
+  footer { background:var(--teal-dark); color:white; padding:4rem 5% 2rem; }
+  .footer-inner { max-width:1200px; margin:0 auto; }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:3rem;
+    padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:2rem; }
+  .footer-brand .logo-footer { width:48px; height:48px; border-radius:50%;
+    border:2px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center;
+    font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; color:white; margin-bottom:1.2rem; }
+  .footer-brand .tagline { font-size:16px; color:var(--teal-light); margin-bottom:0.5rem;
+    font-family:'Outfit',sans-serif; font-weight:300; }
+  .footer-brand p { font-size:14px; line-height:1.65; color:rgba(255,255,255,0.7); max-width:280px; }
+  .footer-col h4 { font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase;
+    color:rgba(255,255,255,0.5); margin-bottom:1.2rem; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:0.6rem; }
+  .footer-col ul a { font-size:14px; color:rgba(255,255,255,0.7); text-decoration:none; transition:color 0.3s; }
+  .footer-col ul a:hover { color:var(--teal-light); }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:1rem; font-size:13px; color:rgba(255,255,255,0.4); }
+  .footer-bottom a { color:rgba(255,255,255,0.4); text-decoration:none; }
+  .footer-bottom a:hover { color:var(--teal-light); }
+
+  .whatsapp-float { position:fixed; bottom:2rem; right:2rem; width:56px; height:56px;
+    background:#25d366; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 20px rgba(37,211,102,0.4); z-index:200; transition:all 0.3s; text-decoration:none; }
+  .whatsapp-float:hover { transform:scale(1.1); }
+  .whatsapp-float svg { width:28px; height:28px; fill:white; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media (max-width:900px) {
+    .nav-links, nav > .btn-cta { display:none; }
+    .hamburger { display:flex; }
+    .intro-inner { grid-template-columns:1fr; gap:2.5rem; }
+    .pillars-grid { grid-template-columns:1fr; }
+    .portfolio-grid { grid-template-columns:1fr; max-width:360px; }
+    .process-line { grid-template-columns:repeat(2,1fr); gap:2rem; }
+    .process-line::before { display:none; }
+    .footer-top { grid-template-columns:1fr 1fr; }
+    .footer-brand { grid-column:1/-1; }
+    .banner-quote { font-size:12rem; right:-2%; }
+  }
+  @media (max-width:600px) {
+    section { padding:3.5rem 5%; }
+    .process-line { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; }
+    .footer-bottom { flex-direction:column; text-align:center; }
+    .banner-quote { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="kk-barreto.html" class="logo">KK</a>
+  <ul class="nav-links">
+    <li><a href="kk-barreto.html">Início</a></li>
+    <li><a href="quem-somos.html">Quem Somos</a></li>
+    <li><a href="servicos.html" class="active">Serviços</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a href="contato.html" class="btn-cta">Fale Conosco</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="blog.html">Blog</a>
+  <a href="contato.html" class="btn-cta" style="text-align:center; margin-top:0.5rem;">Fale Conosco</a>
+</div>
+
+<div class="page-banner">
+  <div class="banner-bg"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-inner">
+    <div class="banner-content">
+      <p class="banner-label">Serviços</p>
+      <h1 class="banner-title">Projetos Editoriais</h1>
+      <p class="banner-sub">Materiais ricos e publicações estratégicas que educam o mercado, retêm a atenção do leitor e consolidam sua marca como uma fonte confiável de informação.</p>
+    </div>
+    <a href="#conteudo" class="banner-arrow">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </div>
+</div>
+
+<section class="intro" id="conteudo">
+  <div class="intro-inner">
+    <div class="intro-text reveal">
+      <div class="section-label">Conteúdo com profundidade</div>
+      <h2>Páginas que <span>permanecem abertas</span></h2>
+      <p>Desenvolvemos materiais editoriais personalizados, com foco no design e nos objetivos do seu negócio. Cada página é planejada para transmitir conhecimento, confiança e clareza — entregando valor real ao seu público.</p>
+      <p>Utilizamos as melhores práticas de diagramação, storytelling e fluidez narrativa para garantir que seu material não seja apenas lido, mas guardado, compartilhado e consultado como referência técnica.</p>
+    </div>
+    <div class="book-visual reveal">
+      <svg viewBox="0 0 500 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="pageL" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fbf9f2"/><stop offset="1" stop-color="#f0ebe0"/>
+          </linearGradient>
+          <linearGradient id="pageR" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fdfbf5"/><stop offset="1" stop-color="#f4efe4"/>
+          </linearGradient>
+          <linearGradient id="cover" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a9a85"/><stop offset="1" stop-color="#0a6b5e"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="250" cy="430" rx="220" ry="14" fill="rgba(10,107,94,0.12)"/>
+        <path d="M40 80 L240 110 L240 400 L40 380 Z" fill="url(#cover)"/>
+        <path d="M460 80 L260 110 L260 400 L460 380 Z" fill="url(#cover)"/>
+        <path d="M50 90 L240 118 L240 392 L50 372 Z" fill="url(#pageL)"/>
+        <path d="M450 90 L260 118 L260 392 L450 372 Z" fill="url(#pageR)"/>
+        <path d="M240 118 Q250 115 260 118 L260 392 Q250 395 240 392 Z" fill="#0a6b5e" opacity="0.3"/>
+        <!-- left page text lines -->
+        <g fill="#0a6b5e" opacity="0.55">
+          <rect x="70" y="140" width="150" height="6" rx="2"/>
+          <rect x="70" y="158" width="120" height="3" rx="1.5"/>
+          <rect x="70" y="170" width="155" height="3" rx="1.5"/>
+          <rect x="70" y="182" width="140" height="3" rx="1.5"/>
+          <rect x="70" y="194" width="150" height="3" rx="1.5"/>
+          <rect x="70" y="206" width="100" height="3" rx="1.5"/>
+        </g>
+        <g fill="#1a9a85" opacity="0.45">
+          <rect x="70" y="240" width="150" height="80" rx="4"/>
+        </g>
+        <g fill="#0a6b5e" opacity="0.55">
+          <rect x="70" y="335" width="130" height="3" rx="1.5"/>
+          <rect x="70" y="347" width="150" height="3" rx="1.5"/>
+          <rect x="70" y="359" width="110" height="3" rx="1.5"/>
+        </g>
+        <!-- right page -->
+        <g fill="#0a6b5e" opacity="0.55">
+          <rect x="280" y="140" width="80" height="8" rx="2"/>
+          <rect x="280" y="160" width="155" height="3" rx="1.5"/>
+          <rect x="280" y="172" width="140" height="3" rx="1.5"/>
+          <rect x="280" y="184" width="150" height="3" rx="1.5"/>
+          <rect x="280" y="196" width="120" height="3" rx="1.5"/>
+        </g>
+        <g fill="#2bb8a0" opacity="0.5">
+          <circle cx="320" cy="260" r="32"/>
+          <rect x="365" y="245" width="70" height="4" rx="2" fill="#0a6b5e" opacity="0.6"/>
+          <rect x="365" y="258" width="55" height="3" rx="1.5" fill="#0a6b5e" opacity="0.6"/>
+          <rect x="365" y="270" width="65" height="3" rx="1.5" fill="#0a6b5e" opacity="0.6"/>
+        </g>
+        <g fill="#0a6b5e" opacity="0.55">
+          <rect x="280" y="320" width="150" height="3" rx="1.5"/>
+          <rect x="280" y="332" width="140" height="3" rx="1.5"/>
+          <rect x="280" y="344" width="100" height="3" rx="1.5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="pillars-head reveal">
+    <div class="section-label">O que entregamos</div>
+    <h2>Três formatos, um <span>mesmo padrão</span> de excelência</h2>
+    <p>Combinamos visual sofisticado com técnicas de redação jornalística e técnica para criar publicações que conduzem o leitor do problema à solução.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card reveal">
+      <div class="pillar-num">01</div>
+      <h3>E-books estratégicos</h3>
+      <p>Materiais ricos para nutrir leads, posicionar autoridade e converter interesse em decisão. Estrutura narrativa, dados de mercado e diagramação editorial em cada página.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">02</div>
+      <h3>Revistas e magazines</h3>
+      <p>Publicações premium que reúnem entrevistas exclusivas, reportagens e visual sofisticado para fortalecer marca e gerar conexão real com o público leitor.</p>
+    </div>
+    <div class="pillar-card reveal">
+      <div class="pillar-num">03</div>
+      <h3>Whitepapers e relatórios</h3>
+      <p>Documentos técnicos que traduzem complexidade em clareza. Ideais para B2B, treinamento de equipes e construção de reputação no mercado.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="process-head reveal">
+    <div class="section-label" style="text-align:center">Nosso processo</div>
+    <h2>Do briefing ao <span>material publicado</span></h2>
+  </div>
+  <div class="process-line">
+    <div class="step reveal"><div class="step-circle">01</div><h4>Imersão</h4><p>Entendemos seu público, objetivos e diferenciais.</p></div>
+    <div class="step reveal"><div class="step-circle">02</div><h4>Pesquisa</h4><p>Levantamos dados, fontes e referências sólidas.</p></div>
+    <div class="step reveal"><div class="step-circle">03</div><h4>Redação &amp; Design</h4><p>Texto e diagramação caminham juntos.</p></div>
+    <div class="step reveal"><div class="step-circle">04</div><h4>Entrega</h4><p>Material pronto para publicar e distribuir.</p></div>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="portfolio-head reveal">
+    <div class="section-label" style="text-align:center">Portfólio</div>
+    <h2>Conheça alguns dos <span>nossos trabalhos</span></h2>
+  </div>
+  <p class="portfolio-sub">Cases de sucesso que refletem nosso compromisso com resultados.</p>
+  <div class="portfolio-grid">
+    <a href="#" class="work-card reveal">
+      <div class="work-thumb">
+        <div class="mag-mock">
+          <div class="mag-tag">E-book</div>
+          <div class="mag-title">Guia do<br>Mercado 2024</div>
+          <div class="mag-img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80" alt="Capa e-book" loading="lazy"></div>
+          <div class="mag-lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">E-book</div>
+        <div class="work-name">Guia do Mercado 2024</div>
+        <div class="work-desc">Material rico para nutrição de leads no setor financeiro.</div>
+      </div>
+    </a>
+    <a href="#" class="work-card reveal">
+      <div class="work-thumb">
+        <div class="mag-mock">
+          <div class="mag-tag">Revista</div>
+          <div class="mag-title">Insights<br>Magazine</div>
+          <div class="mag-img"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=400&q=80" alt="Capa revista" loading="lazy"></div>
+          <div class="mag-lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">Revista</div>
+        <div class="work-name">Insights Magazine</div>
+        <div class="work-desc">Publicação trimestral com entrevistas e reportagens exclusivas.</div>
+      </div>
+    </a>
+    <a href="#" class="work-card reveal">
+      <div class="work-thumb">
+        <div class="mag-mock">
+          <div class="mag-tag">Whitepaper</div>
+          <div class="mag-title">Relatório<br>Setorial</div>
+          <div class="mag-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80" alt="Capa whitepaper" loading="lazy"></div>
+          <div class="mag-lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">Whitepaper</div>
+        <div class="work-name">Relatório Setorial</div>
+        <div class="work-desc">Documento técnico com dados de mercado e análises aprofundadas.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <div class="section-label" style="text-align:center">Precisa de autoridade?</div>
+    <h2>Transforme seu conhecimento em um <span>material que gera leads</span></h2>
+    <p>Vamos planejar juntos uma publicação que coloque sua marca na estante — e na mente — do seu público.</p>
+    <a href="contato.html" class="btn-primary-large">Criar meu projeto editorial &rsaquo;&rsaquo;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-footer">kk</div>
+        <p class="tagline">O equilíbrio perfeito entre<br>tradição e inovação.</p>
+        <p>KK Barreto Comunica, 2024</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="kk-barreto.html">Home</a></li>
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 KK Barreto Comunica. Todos os direitos reservados.</p>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="politica-privacidade.html">Políticas de privacidade</a>
+        <a href="termos-de-uso.html">Termos de uso</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+</script>
+</body>
+</html>

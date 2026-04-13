@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O impacto do marketing digital na captação de pacientes — KK Barreto Comunica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal-dark: #0a6b5e; --teal: #1a9a85; --teal-mid: #2bb8a0;
+    --teal-light: #a8e6dc; --teal-pale: #e8f7f5; --sage: #7aab8a;
+    --cream: #f8f6f0; --white: #ffffff; --text-dark: #1a2b28;
+    --text-mid: #3d5550; --text-muted: #7a9490;
+    --border: rgba(26,154,133,0.15);
+    --shadow: 0 8px 32px rgba(10,107,94,0.1);
+    --shadow-hover: 0 16px 48px rgba(10,107,94,0.18);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(10,107,94,0.08); }
+  .logo { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--teal-dark); text-decoration: none; transition: all 0.3s; }
+  .logo:hover { background: var(--teal); color: white; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-mid); text-decoration: none; position: relative; padding-bottom: 3px; transition: color 0.3s; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--teal); transition: width 0.3s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--teal-dark); }
+  .btn-cta { padding: 10px 22px; background: var(--teal); color: white; border: none; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+  .btn-cta:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--teal-dark); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 1.5rem 5%; border-bottom: 1px solid var(--border); z-index: 99; flex-direction: column; gap: 1rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--text-mid); text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .mobile-menu a:hover { color: var(--teal); }
+
+  /* PROGRESS BAR */
+  .reading-progress { position: fixed; top: 68px; left: 0; right: 0; height: 3px; background: var(--teal-pale); z-index: 99; }
+  .reading-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--sage)); transition: width 0.1s linear; }
+
+  /* ARTICLE HERO */
+  .article-hero {
+    margin-top: 71px;
+    background: var(--cream);
+    padding: 4rem 5% 3rem;
+  }
+  .hero-inner { max-width: 820px; margin: 0 auto; }
+
+  .breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 13px; color: var(--text-muted); margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--teal-dark); }
+  .breadcrumb-sep { color: var(--text-muted); font-size: 11px; }
+
+  .article-tag { display: inline-block; padding: 4px 14px; background: var(--teal-pale); color: var(--teal-dark); border-radius: 99px; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; font-family: 'Outfit', sans-serif; margin-bottom: 1rem; border: 1px solid var(--teal-light); }
+
+  .article-hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin-bottom: 1.2rem; }
+
+  .article-meta { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding: 1.2rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 0; }
+  .meta-author { display: flex; align-items: center; gap: 0.6rem; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; color: white; }
+  .author-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+  .meta-sep { width: 1px; height: 20px; background: var(--border); }
+  .meta-info { font-size: 13px; color: var(--text-muted); }
+  .meta-read { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--text-muted); }
+  .meta-read svg { width: 14px; height: 14px; stroke: var(--teal); fill: none; stroke-width: 2; }
+
+  /* COVER IMAGE */
+  .article-cover { max-width: 820px; margin: 0 auto; height: 420px; background: linear-gradient(135deg, var(--teal-pale), var(--teal-light)); border-radius: 16px; overflow: hidden; position: relative; }
+  .article-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--sage-light, #c8dfc6) 0%, var(--teal-light) 60%, var(--teal-mid) 100%); }
+
+  /* LAYOUT */
+  .article-layout { max-width: 1200px; margin: 0 auto; padding: 3.5rem 5%; display: grid; grid-template-columns: 1fr 300px; gap: 4rem; align-items: start; }
+
+  /* ARTICLE BODY */
+  .article-body { min-width: 0; }
+
+  .article-lead { font-family: 'Lora', serif; font-size: 18px; line-height: 1.8; color: var(--text-mid); margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); font-style: italic; }
+
+  .article-content h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin: 2.5rem 0 1rem; line-height: 1.3; }
+  .article-content h3 { font-family: 'Outfit', sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--teal-dark); margin: 2rem 0 0.8rem; }
+  .article-content p { font-size: 16px; line-height: 1.85; color: var(--text-mid); margin-bottom: 1.4rem; }
+  .article-content strong { color: var(--text-dark); font-weight: 600; }
+  .article-content a { color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--teal-light); transition: border-color 0.2s; }
+  .article-content a:hover { border-color: var(--teal); }
+
+  .article-content ul, .article-content ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+  .article-content li { font-size: 16px; line-height: 1.8; color: var(--text-mid); margin-bottom: 0.4rem; }
+
+  .article-blockquote { margin: 2rem 0; padding: 1.5rem 2rem; background: var(--teal-pale); border-left: 4px solid var(--teal); border-radius: 0 12px 12px 0; }
+  .article-blockquote p { font-family: 'Lora', serif; font-size: 17px; font-style: italic; color: var(--teal-dark); line-height: 1.7; margin: 0; }
+
+  .article-highlight { margin: 2rem 0; padding: 1.8rem; background: linear-gradient(135deg, var(--teal-pale), #f0faf8); border-radius: 12px; border: 1px solid var(--teal-light); }
+  .article-highlight p { font-size: 15px; color: var(--text-mid); line-height: 1.7; margin: 0; }
+  .article-highlight .highlight-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; }
+
+  /* SHARE + TAGS */
+  .article-footer-meta { padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .article-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .art-tag { padding: 5px 14px; background: var(--teal-pale); color: var(--teal-dark); border-radius: 99px; font-size: 12px; font-weight: 500; border: 1px solid var(--teal-light); }
+  .share-row { display: flex; align-items: center; gap: 0.8rem; }
+  .share-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .share-btn { width: 36px; height: 36px; border-radius: 8px; background: var(--teal-pale); border: 1px solid var(--teal-light); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+  .share-btn:hover { background: var(--teal); border-color: var(--teal); }
+  .share-btn:hover svg { stroke: white; fill: white; }
+  .share-btn svg { width: 15px; height: 15px; fill: var(--teal); stroke: none; }
+
+  /* CTA WITHIN ARTICLE */
+  .article-cta { margin: 3rem 0; padding: 2.5rem; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: 16px; text-align: center; }
+  .article-cta h3 { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 0.6rem; }
+  .article-cta p { font-size: 14px; color: rgba(255,255,255,0.82); margin-bottom: 1.5rem; line-height: 1.6; }
+  .article-cta a { display: inline-block; padding: 12px 28px; background: white; color: var(--teal-dark); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.3s; }
+  .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+  /* AUTHOR BOX */
+  .author-box { margin-top: 3rem; padding: 2rem; background: var(--cream); border-radius: 16px; border: 1px solid var(--border); display: flex; gap: 1.5rem; align-items: flex-start; }
+  .author-box-avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--teal-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: white; flex-shrink: 0; }
+  .author-box-info h4 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; }
+  .author-box-info .role { font-size: 13px; color: var(--teal); font-weight: 500; margin-bottom: 0.6rem; }
+  .author-box-info p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  /* SIDEBAR */
+  .sidebar { position: sticky; top: 90px; }
+
+  .sidebar-card { background: var(--cream); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .sidebar-title { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 1.2rem; }
+
+  /* Table of contents */
+  .toc-list { list-style: none; }
+  .toc-list li { margin-bottom: 0.5rem; }
+  .toc-list a { font-size: 13px; color: var(--text-mid); text-decoration: none; display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; transition: color 0.2s; padding: 4px 0; border-left: 2px solid transparent; padding-left: 8px; }
+  .toc-list a:hover, .toc-list a.active { color: var(--teal); border-left-color: var(--teal); }
+
+  /* Related posts */
+  .related-post { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+  .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+  .related-thumb { width: 60px; height: 50px; border-radius: 8px; background: linear-gradient(135deg, var(--teal-pale), var(--teal-light)); flex-shrink: 0; overflow: hidden; }
+  .related-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .related-info h5 { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.4; margin-bottom: 0.2rem; }
+  .related-info a { text-decoration: none; color: inherit; }
+  .related-info a:hover h5 { color: var(--teal); }
+  .related-info span { font-size: 11px; color: var(--text-muted); }
+
+  /* Sidebar CTA */
+  .sidebar-cta { background: linear-gradient(135deg, var(--teal), var(--teal-dark)); border-radius: 14px; padding: 1.8rem 1.5rem; text-align: center; }
+  .sidebar-cta h4 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; color: white; margin-bottom: 0.5rem; }
+  .sidebar-cta p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 1.2rem; }
+  .sidebar-cta a { display: block; padding: 10px; background: white; color: var(--teal-dark); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.3s; }
+  .sidebar-cta a:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+  /* RELATED ARTICLES BOTTOM */
+  .related-section { background: var(--cream); padding: 4rem 5%; }
+  .related-header { max-width: 1100px; margin: 0 auto 2.5rem; }
+  .related-header h2 { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 600; color: var(--text-dark); }
+  .related-header h2 span { color: var(--teal); }
+  .related-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .rel-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all 0.3s; }
+  .rel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--teal-light); }
+  .rel-card-img { height: 160px; background: linear-gradient(135deg, var(--teal-pale), var(--teal-light)); overflow: hidden; }
+  .rel-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rel-card-body { padding: 1.2rem; }
+  .rel-card-date { font-size: 11px; color: var(--text-muted); margin-bottom: 0.4rem; font-weight: 500; }
+  .rel-card-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.4; margin-bottom: 0.8rem; }
+  .rel-card:hover .rel-card-title { color: var(--teal); }
+  .rel-card-link { font-size: 13px; color: var(--teal); text-decoration: none; font-weight: 600; }
+
+  /* FOOTER */
+  footer { background: var(--teal-dark); color: white; padding: 4rem 5% 2rem; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; }
+  .footer-brand .logo-footer { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: white; margin-bottom: 1.2rem; }
+  .footer-brand p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.7); max-width: 280px; }
+  .footer-brand .tagline { font-size: 16px; color: var(--teal-light); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; font-weight: 300; }
+  .footer-col h4 { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
+  .footer-col ul a:hover { color: var(--teal-light); }
+  .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+  .social-btn { width: 38px; height: 38px; border-radius: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; }
+  .social-btn:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-2px); }
+  .social-btn svg { width: 16px; height: 16px; fill: white; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 13px; color: rgba(255,255,255,0.4); }
+  .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--teal-light); }
+  .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 200; transition: all 0.3s; text-decoration: none; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .whatsapp-float svg { width: 28px; height: 28px; fill: white; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .article-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .sidebar-card:last-child { grid-column: 1 / -1; }
+    .related-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .nav-links, .btn-cta { display: none; }
+    .hamburger { display: flex; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 0 4%; }
+    .article-hero { padding: 3rem 4% 0; }
+    .article-layout { padding: 2.5rem 4%; }
+    .article-cover { height: 220px; }
+    .sidebar { grid-template-columns: 1fr; }
+    .related-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- READING PROGRESS -->
+<div class="reading-progress"><div class="reading-progress-bar" id="progressBar"></div></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="kk-barreto.html" class="logo">KK</a>
+  <ul class="nav-links">
+    <li><a href="kk-barreto.html">Início</a></li>
+    <li><a href="quem-somos.html">Quem Somos</a></li>
+    <li><a href="servicos.html">Serviços</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+  </ul>
+  <a href="contato.html" class="btn-cta">Fale Conosco</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="kk-barreto.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="blog.html">Blog</a>
+  <a href="contato.html" class="btn-cta" style="text-align:center; margin-top:0.5rem;">Fale Conosco</a>
+</div>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="kk-barreto.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="blog.html">Blog</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Marketing Digital</span>
+    </div>
+    <span class="article-tag">Marketing Digital</span>
+    <h1>O impacto do marketing digital na captação de pacientes para clínicas</h1>
+    <div class="article-meta">
+      <div class="meta-author">
+        <div class="author-avatar">KB</div>
+        <span class="author-name">Kaka Barreto</span>
+      </div>
+      <div class="meta-sep"></div>
+      <span class="meta-info">6 de Fevereiro de 2025</span>
+      <div class="meta-sep"></div>
+      <div class="meta-read">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        8 min de leitura
+      </div>
+    </div>
+  </div>
+  <div class="article-cover">
+    <img src="img/artigo-capa.jpg" alt="Capa do artigo">
+  </div>
+</div>
+
+<!-- ARTICLE LAYOUT -->
+<div class="article-layout">
+
+  <!-- MAIN CONTENT -->
+  <article class="article-body reveal">
+    <p class="article-lead">O setor de saúde passou por uma transformação digital profunda nos últimos anos. Clínicas e consultórios que antes dependiam exclusivamente de indicações agora contam com ferramentas poderosas para atrair, engajar e fidelizar pacientes de forma estratégica e mensurável.</p>
+
+    <div class="article-content">
+
+      <h2 id="cenario">O novo cenário da saúde digital</h2>
+      <p>Segundo dados recentes, mais de <strong>77% dos pacientes</strong> pesquisam na internet antes de marcar uma consulta. Isso significa que a presença digital deixou de ser um diferencial e passou a ser uma necessidade básica para qualquer profissional de saúde que deseja crescer de forma sustentável.</p>
+      <p>A pandemia acelerou essa migração. Pacientes que antes chegavam por indicação de amigos agora chegam por busca orgânica no Google, pelo Instagram ou por recomendações em grupos de Facebook. O comportamento mudou — e a comunicação das clínicas precisa acompanhar.</p>
+
+      <div class="article-blockquote">
+        <p>"Não basta ser um excelente profissional. Você precisa ser encontrado, reconhecido e escolhido antes mesmo da primeira consulta."</p>
+      </div>
+
+      <h2 id="estrategias">Estratégias que realmente funcionam</h2>
+      <p>Existem diversas frentes dentro do marketing digital para saúde. A chave está em escolher as que fazem mais sentido para o seu perfil de paciente ideal e para a sua especialidade.</p>
+
+      <h3>1. SEO local — seja encontrado no Google</h3>
+      <p>Quando alguém pesquisa "dermatologista em São Paulo", os resultados que aparecem em primeiro lugar não são por acaso — são fruto de uma estratégia de SEO bem executada. Otimizar seu site e seu perfil no Google Meu Negócio pode triplicar o volume de pacientes novos sem investimento em anúncios.</p>
+
+      <h3>2. Conteúdo educativo como construção de autoridade</h3>
+      <p>Artigos de blog, vídeos explicativos e posts informativos no Instagram educam o paciente, constroem confiança e posicionam o profissional como referência. Quanto mais você educa, mais você é percebido como autoridade na sua área.</p>
+
+      <div class="article-highlight">
+        <p class="highlight-title">💡 Dica prática</p>
+        <p>Comece respondendo as 10 perguntas mais frequentes que seus pacientes fazem no consultório. Transforme cada resposta em um conteúdo — seja um post, um vídeo curto ou um artigo no blog. Simples assim.</p>
+      </div>
+
+      <h3>3. Tráfego pago com segmentação precisa</h3>
+      <p>Google Ads e Meta Ads permitem segmentar seus anúncios por localização, faixa etária, interesses e comportamentos. Uma campanha bem configurada consegue trazer pacientes qualificados com custo por aquisição muito inferior ao de outros canais.</p>
+
+      <h2 id="resultados">Resultados esperados e como medir</h2>
+      <p>Uma estratégia digital bem executada para saúde costuma apresentar resultados perceptíveis entre 3 e 6 meses. Os principais indicadores a acompanhar são:</p>
+      <ul>
+        <li>Volume de novos agendamentos por canal (Google, Instagram, indicação)</li>
+        <li>Taxa de conversão do site (visitas que viram consultas)</li>
+        <li>Custo por paciente captado</li>
+        <li>Avaliações e reputação digital (Google, Doctoralia)</li>
+        <li>Engajamento nas redes sociais</li>
+      </ul>
+
+      <div class="article-cta">
+        <h3>Quer colocar sua clínica no digital?</h3>
+        <p>A KK Barreto Comunica tem experiência comprovada em comunicação para saúde. Vamos conversar sobre como podemos ajudar.</p>
+        <a href="contato.html">Falar com especialista →</a>
+      </div>
+
+      <h2 id="conclusao">Conclusão</h2>
+      <p>O marketing digital para saúde não é mais uma opção — é uma necessidade competitiva. Profissionais que investem em presença digital consistente estão captando mais pacientes, fidelizando melhor e construindo uma reputação sólida a longo prazo.</p>
+      <p>O segredo está em ter uma estratégia coerente, respeitar as diretrizes dos órgãos reguladores (CFM, CFO, CFP) e contar com parceiros especializados que entendam as particularidades da comunicação em saúde.</p>
+    </div>
+
+    <div class="article-footer-meta">
+      <div class="article-tags">
+        <span class="art-tag">Marketing Digital</span>
+        <span class="art-tag">Saúde</span>
+        <span class="art-tag">Captação</span>
+        <span class="art-tag">SEO</span>
+      </div>
+      <div class="share-row">
+        <span class="share-label">Compartilhar:</span>
+        <a href="#" class="share-btn" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+        <a href="#" class="share-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="var(--teal)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="#" class="share-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="var(--teal)"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4" fill="white"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg></a>
+      </div>
+    </div>
+
+    <!-- AUTHOR BOX -->
+    <div class="author-box">
+      <div class="author-box-avatar">KB</div>
+      <div class="author-box-info">
+        <h4>Kaka Barreto</h4>
+        <p class="role">CEO &amp; Diretora Criativa — KK Barreto Comunica</p>
+        <p>Especialista em comunicação estratégica para saúde, comportamento e qualidade de vida. Fundadora da KK Barreto Comunica, com mais de 10 anos de experiência no mercado.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-card">
+      <p class="sidebar-title">Neste artigo</p>
+      <ul class="toc-list">
+        <li><a href="#cenario" class="active">O novo cenário da saúde digital</a></li>
+        <li><a href="#estrategias">Estratégias que funcionam</a></li>
+        <li><a href="#resultados">Resultados e métricas</a></li>
+        <li><a href="#conclusao">Conclusão</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <p class="sidebar-title">Artigos relacionados</p>
+      <div class="related-post">
+        <div class="related-thumb"><img src="img/sidebar-1.jpg" alt=""></div>
+        <div class="related-info">
+          <a href="blog-artigo.html"><h5>A importância das avaliações online para profissionais da saúde</h5></a>
+          <span>12 Dez 2024</span>
+        </div>
+      </div>
+      <div class="related-post">
+        <div class="related-thumb"><img src="img/sidebar-2.jpg" alt=""></div>
+        <div class="related-info">
+          <a href="blog-artigo.html"><h5>Como criar conteúdos educativos para fidelizar pacientes</h5></a>
+          <span>07 Nov 2024</span>
+        </div>
+      </div>
+      <div class="related-post">
+        <div class="related-thumb"><img src="img/sidebar-3.jpg" alt=""></div>
+        <div class="related-info">
+          <a href="blog-artigo.html"><h5>Tendências digitais na área da saúde</h5></a>
+          <span>28 Out 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-cta">
+      <h4>Vamos trabalhar juntos?</h4>
+      <p>Descubra como a KK Barreto Comunica pode elevar a presença digital da sua marca.</p>
+      <a href="contato.html">Entrar em contato</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- RELATED BOTTOM -->
+<section class="related-section">
+  <div class="related-header reveal">
+    <h2>Mais conteúdos que podem <span>te interessar</span></h2>
+  </div>
+  <div class="related-grid">
+    <div class="rel-card reveal">
+      <div class="rel-card-img"><img src="img/relacionado-1.jpg" alt=""></div>
+      <div class="rel-card-body">
+        <p class="rel-card-date">10 de Janeiro de 2025</p>
+        <h4 class="rel-card-title">Como a telemedicina está revolucionando o atendimento médico</h4>
+        <a href="blog-artigo.html" class="rel-card-link">Veja mais →</a>
+      </div>
+    </div>
+    <div class="rel-card reveal">
+      <div class="rel-card-img"><img src="img/relacionado-2.jpg" alt=""></div>
+      <div class="rel-card-body">
+        <p class="rel-card-date">2 de Janeiro de 2025</p>
+        <h4 class="rel-card-title">Dicas para tornar seu perfil profissional mais atrativo nas redes sociais</h4>
+        <a href="blog-artigo.html" class="rel-card-link">Veja mais →</a>
+      </div>
+    </div>
+    <div class="rel-card reveal">
+      <div class="rel-card-img"><img src="img/relacionado-3.jpg" alt=""></div>
+      <div class="rel-card-body">
+        <p class="rel-card-date">28 de Outubro de 2024</p>
+        <h4 class="rel-card-title">Tendências digitais na área da saúde: o que esperar para os próximos anos?</h4>
+        <a href="blog-artigo.html" class="rel-card-link">Veja mais →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-footer">KK</div>
+        <p class="tagline">O equilíbrio perfeito entre tradição e inovação.</p>
+        <p>KK Barreto Comunica, 2024.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" style="fill:none;stroke:white;stroke-width:1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" style="stroke:white;stroke-width:2;stroke-linecap:round"/></svg></a>
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 KK Barreto Comunica. Todos os direitos reservados.</p>
+      <div style="display:flex;gap:1.5rem;"><a href="politica-privacidade.html">Políticas de privacidade</a><a href="termos-de-uso.html">Termos de uso</a><a href="cookies.html">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 30); });
+  function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  // Reading progress
+  window.addEventListener('scroll', () => {
+    const el = document.documentElement;
+    const scrolled = el.scrollTop;
+    const total = el.scrollHeight - el.clientHeight;
+    document.getElementById('progressBar').style.width = Math.round((scrolled / total) * 100) + '%';
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  // Active TOC
+  const headings = document.querySelectorAll('h2[id]');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    headings.forEach(h => { if (window.scrollY >= h.offsetTop - 120) current = h.id; });
+    tocLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  });
+</script>
+</body>
+</html>
